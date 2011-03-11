@@ -109,6 +109,14 @@ Will Output the help information.
     Viewing sheet specifics
     cheat_fu ronn | grep :empty
 
+## Making Roff Files:
+
+`$ ronn --roff my_cheat.1.ronn`
+
+This will output your Roff file.
+
+`roff: ./my_cheat.1`
+
 ## Tips
 
    * Grep!, you would not have problems with things such as `$ cheat_fu ronn | grep :empty`
