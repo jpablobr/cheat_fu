@@ -11,6 +11,8 @@ Which by the way also produces [awesome html man pages!.](http://rtomayko.github
 
 This might me a drawback or a really cool feature depending on how you look at it, since you will have to learn Ronn in order to covert your cheats sheets. (pretty much just markdown)
 
+Well, you are not actually required to use ronn for making man pages... but it just make it so much easier!
+
 Cheat_fu was inspired by `cheat` [cheat.errtheblog.com](cheat.errtheblog.com) by Chris Wanstrath and `ch` [cheats](https://github.com/visionmedia/ch) by [visionmedia](https://github.com/visionmedia).
 
 ## Screenshot
