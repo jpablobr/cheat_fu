@@ -2,10 +2,10 @@
 
 ## Description:
 
-Cheat_fu is a quick cheats sheets (sh-based) command line tool (based on git) meant to provide a nice shell terminal layout to your cheat sheets.
+[Cheat_fu](http://cheat-fu.heroku.com/) is a quick cheats sheets (sh-based) command line tool (based on git) meant to provide a nice shell terminal layout to your cheat sheets.
 
 One of its main features is that it uses [rtomayko's Ronn](https://github.com/rtomayko/ronn) tool to convert
-[markdown(7)](http://daringfireball.net/projects/markdown/syntax) files to [man pages UNIX format])(http://man.cx/man).
+[markdown(7)](http://daringfireball.net/projects/markdown/syntax) files to [man pages UNIX format](http://man.cx/man).
 
 Which by the way also produces [awesome html man pages!.](http://rtomayko.github.com/ronn/ronn.1.html)
 
