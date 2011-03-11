@@ -122,7 +122,11 @@ This will output your Roff file.
    * Grep!, you would not have problems with things such as `$ cheat_fu ronn | grep :empty`
    * Aliases: `alias ct='cheat_fu'`
 
-### Directory Structure:
+## TODO:
+
+* An emacs cheat_fu-mode
+
+## Directory Structure:
     .
     ├── bin
     │   └── cheat_fu
