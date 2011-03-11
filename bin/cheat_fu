@@ -30,9 +30,9 @@
 
 PROGNAME=$(basename $0)
 VERSION='0.1.0'
-CHT_SHEETS=${CHT_SHEETS:-~/.cheats_fu/}
-CHT_REPO=${CHT_REPO:-git://github.com/jpablobr/cheats_fu_sheets.git}
-CHT_ORIGIN=${CHT_ORIGIN:-git://github.com/jpablobr/cheats_fu.git}
+CHT_SHEETS=${CHT_SHEETS:-~/.cheat_fu_sheets/}
+CHT_REPO=${CHT_REPO:-git://github.com/jpablobr/cheat_fu_sheets.git}
+CHT_ORIGIN=${CHT_ORIGIN:-git://github.com/jpablobr/cheat_fu.git}
 
 # tput() color {code}s:
 # 0	 Black
