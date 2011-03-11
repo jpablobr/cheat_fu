@@ -1,26 +1,46 @@
-
-                                                        //  ) )
-    ___     / __      ___      ___    __  ___        __//__
-  //   ) ) //   ) ) //___) ) //   ) )  / /            //   //   / /
- //       //   / / //       //   / /  / /            //   //   / /
-((____   //   / / ((____   ((___( (  / /      _____ //   ((___( (
-
+# Cheat_fu
 
 ## Description:
 
-Cheat_fu is a command line cheat sheet utility based on git. A simple tool for easy cheat sheet control.
+Cheat_fu is a command line cheat sheet utility based on git. A simple tool for
+easy cheat sheet control.
 
-One if its main/coolest features is that it uses rtomayko's [Ronn](https://github.com/rtomayko/ronn) tool for converting [markdown(7)](http://daringfireball.net/projects/markdown/syntax) files to manpages. Which by the way also produces [awesome html man pages!.](http://rtomayko.github.com/ronn/ronn.1.html)
+One if its main features is that it uses [rtomayko's](https://github.com/rtomayko) [Ronn](https://github.com/rtomayko/ronn) tool for converting
+[markdown(7)](http://daringfireball.net/projects/markdown/syntax) files to man pages.
 
-Cheat_fu was inspired by `cheat` [cheat.errtheblog.com/](cheat.errtheblog.com/) by Chris Wanstrath and `ch` by [cheats](https://github.com/visionmedia/ch) visionmedia.
+Which by the way also produces [awesome html man pages!.](http://rtomayko.github.com/ronn/ronn.1.html)
 
+This might me a drawback or a really cool feature depending on how you look at
+it, since you will have to learn ronn (pretty much just markdown) so you can
+covert your cheats sheets to [man(1) pages UNIX format])(http://man.cx/man(1))
+
+Cheat_fu was inspired by `cheat` [cheat.errtheblog.com](cheat.errtheblog.com) by Chris Wanstrath and `ch` [cheats](https://github.com/visionmedia/ch) by [visionmedia](https://github.com/visionmedia).
+
+## Man Pages Background ( [by rtomayko](https://github.com/rtomayko/ronn) )
+
+Some think UNIX manual pages are a poor and outdated form of documentation. I disagree:
+
+Manpages follow a well defined structure that's immediately familiar. This gives developers a starting point when documenting new tools, libraries, and formats.
+
+Manpages get to the point. Because they're written in an inverted style, with a SYNOPSIS section followed by additional detail, prose and references to other sources of information, manpages provide the best of both cheat sheet and reference style documentation.
+
+Historically, manpages use an extremely -- unbelievably -- limited set of text formatting capabilities. You get a couple of headings, lists, bold, underline and no more. This is a feature.
+
+Although two levels of section hierarchy are technically supported, most manpages use only a single level. Unwieldy document hierarchies complicate otherwise good documentation. Remember that Feynman covered all of physics -- heavenly bodies through QED -- with only two levels of document hierarchy (The Feynman Lectures on Physics, 1970).
+
+The classical terminal manpage display is typographically well thought out. Big bold section headings, justified monospace text, nicely indented paragraphs, intelligently aligned definition lists, and an informational header and footer.
+
+Manpages have a simple referencing syntax; e.g., sh(1), fork(2), markdown(7). HTML versions can use this to generate links between pages.
+
+Unfortunately, figuring out how to create a manpage is a fairly tedious process. The roff/mandoc/mdoc macro languages are highly extensible, fractured between multiple dialects, and include a bunch of device specific stuff irrelevant to modern publishing tools.
 ## Screenshot
 
 ![Screenshot at flick](http://farm6.static.flickr.com/5016/5517136146_624976a477_z.jpg)
+
 [Screenshot at flick](http://www.flickr.com/photos/30142618@N02/5517136146/)
 
 ## Features
-  * concise set of notes used for quick reference.
+  * Concise set of notes used for quick reference.
   * Git powered cheat sheet repository.
   * Custom sheets repo.
   * Fast!
