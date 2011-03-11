@@ -5,14 +5,12 @@
 Cheat_fu is a command line cheat sheet utility based on git. A simple tool for
 easy cheat sheet control.
 
-One if its main features is that it uses [rtomayko's](https://github.com/rtomayko) [Ronn](https://github.com/rtomayko/ronn) tool for converting
+One of its main features is that it uses [rtomayko's Ronn](https://github.com/rtomayko/ronn) tool to convert
 [markdown(7)](http://daringfireball.net/projects/markdown/syntax) files to man pages.
 
 Which by the way also produces [awesome html man pages!.](http://rtomayko.github.com/ronn/ronn.1.html)
 
-This might me a drawback or a really cool feature depending on how you look at
-it, since you will have to learn ronn (pretty much just markdown) so you can
-covert your cheats sheets to [man(1) pages UNIX format])(http://man.cx/man(1))
+This might me a drawback or a really cool feature depending on how you look at it, since you will have to learn Ronn so you can covert your cheats sheets to [man pages UNIX format])(http://man.cx/man(1)). (pretty much just markdown)
 
 Cheat_fu was inspired by `cheat` [cheat.errtheblog.com](cheat.errtheblog.com) by Chris Wanstrath and `ch` [cheats](https://github.com/visionmedia/ch) by [visionmedia](https://github.com/visionmedia).
 
