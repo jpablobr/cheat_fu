@@ -1,11 +1,8 @@
 # Cheat_fu
 
-Quick cheats sheets (sh-based) command line tool.
-
 ## Description:
 
-Cheat_fu is a command line cheat sheet utility based on git. A simple tool for
-easy cheat sheet control.
+Cheat_fu is a quick cheats sheets (sh-based) command line tool (based on git) meant to provide a nice shell terminal layout to your cheat sheets.
 
 One of its main features is that it uses [rtomayko's Ronn](https://github.com/rtomayko/ronn) tool to convert
 [markdown(7)](http://daringfireball.net/projects/markdown/syntax) files to [man pages UNIX format])(http://man.cx/man).
