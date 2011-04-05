@@ -69,8 +69,18 @@ modern publishing tools.
 
 ## Installing/Uninstalling
 
+    $ git clone git://github.com/jpablobr/cheat_fu.git && cd cheat_fu
     $ sudo make install
+
+Debian based distro:
+
+    $ sudo dpkg --install ./cheat-fu_1.1-1_all.deb
+
+Uninstall
+
     $ sudo make uninstall
+    # Debian
+    $ sudo dpkg --remove cheat-fu
 
 Cheat_fu is just a bash shell script, therefore, you can just put it on one of your `bin` directories in your `$PATH` and you're ready to start cheating!
 

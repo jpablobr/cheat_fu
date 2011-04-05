@@ -1,0 +1,272 @@
+#!/usr/bin/env bash
+#	-------------------------------------------------------------------
+#
+#	Quick cheats sheets command line tool.
+#
+#	Copyright 2011, José Pablo Barrantes R. <xjpablobr@gmail.com>
+# http://jpablobr.com
+#
+#	This program is free software; you can redistribute it and/or
+#	modify it under the terms of the GNU General Public License as
+#	published by the Free Software Foundation; either version 2 of the
+#	License, or (at your option) any later version.
+#
+#	This program is distributed in the hope that it will be useful, but
+#	WITHOUT ANY WARRANTY; without even the implied warranty of
+#	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#	General Public License for more details.
+#
+#	Description:
+#
+# $  cheat_fu -h
+#
+#	Usage: Please see readme or use the -h option.
+#
+#	Revision History:
+#
+#	-------------------------------------------------------------------
+#	Constants
+#	-------------------------------------------------------------------
+
+PROGNAME=$(basename $0)
+VERSION='0.1.0'
+CHT_SHEETS=${CHT_SHEETS:-~/.cheat_fu_sheets/}
+CHT_REPO=${CHT_REPO:-git://github.com/jpablobr/cheat_fu_sheets.git}
+CHT_ORIGIN=${CHT_ORIGIN:-git://github.com/jpablobr/cheat_fu.git}
+
+# tput() color {code}s:
+# 0	 Black
+# 1	 Red
+# 2	 Green
+# 3	 Yellow
+# 4	 Blue
+# 5	 Magenta
+# 6	 Cyan
+# 7	 White
+OUTPUT_COLOR="$(tput setaf 2)"
+
+#	----------------------------------------------------------------------
+#	Functions
+#	----------------------------------------------------------------------
+
+function helptext {
+#	-----------------------------------------------------------------------
+#	Function to display help message for program
+#		No arguments
+#	-----------------------------------------------------------------------
+	local tab=$(echo -en "\t\t")
+
+	cat <<- -EOF-
+                                                        //  ) )
+    ___     / __      ___      ___    __  ___        __//__
+  //   ) ) //   ) ) //___) ) //   ) )  / /            //   //   / /
+ //       //   / / //       //   / /  / /            //   //   / /
+((____   //   / / ((____   ((___( (  / /      _____ //   ((___( (
+
+  Options:
+  -h, ,ch --help	Display this help message and exit.
+  -s              Outputs a list of sheets matching [sheet] or all sheets
+  -l              Outputs the path(s) to [sheet] or all sheets
+  -u              Updates the cheat sheet repo to grab the latest changes.
+  -u [self]       Updates cheat_fu.
+  -v              Outputs current version.
+
+  $ cheat_fu -r ronn
+
+  Reads the exact <sheet> given. No globbing allowed here!
+
+  $ cheat_fu -l ronn
+
+  Output paths to sheets matching 'ronn'
+
+  $ cheat_fu -s
+
+  Output list of all sheets
+
+  $ cheat_fu -u
+
+  Update cheat sheet repository
+
+  $ cheat_fu -u self
+
+  Update the 'cheat_fu' executable
+
+  Viewing sheet specifics
+  cheat_fu ronn | grep :empty
+
+-EOF-
+}
+
+function error_exit {
+#	-----------------------------------------------------------------------
+#	Function for exit due to fatal program error
+#		Accepts 1 argument:
+#			string containing descriptive error message
+#	-----------------------------------------------------------------------
+	echo "${PROGNAME}: ${1:-"Unknown Error"}" >&2
+	exit 1
+}
+
+function signal_exit {
+#	-----------------------------------------------------------------------
+#	Function to handle termination signals
+#		Accepts 1 argument:
+#			signal_spec
+#	-----------------------------------------------------------------------
+	case $1 in
+		INT)	echo "$PROGNAME: Program aborted by user" >&2
+			exit
+			;;
+		TERM)	echo "$PROGNAME: Program terminated" >&2
+			exit
+			;;
+		*)	error_exit "$PROGNAME: Terminating on unknown signal"
+n			;;
+	esac
+}
+
+function usage {
+#	-----------------------------------------------------------------------
+#	Function to display usage message (does not exit).
+#		No arguments
+#	-----------------------------------------------------------------------
+	echo "  Usage: ${PROGNAME} [-h | --help]"
+  echo "  Guru Meditation..."
+  exit
+}
+
+function locate_cht {
+#	-----------------------------------------------------------------------
+#	Function to output paths to sheets matching arguments.
+#		No arguments
+#	-----------------------------------------------------------------------
+    if [ $1 ]; then
+        find $CHT_SHEETS                                                \
+            -type f                                                     \
+            -name "*$1*.1"                                              \
+            -printf "$OUTPUT_COLOR  %p \n"
+    else
+        find $CHT_SHEETS                                                \
+            -name "*.1"                                                 \
+            -type f                                                     \
+            -printf "$OUTPUT_COLOR  %p \n"
+    fi
+}
+
+function search_cht {
+#	-----------------------------------------------------------------------
+#	Function to outputs list of all sheets matching the given arguments.
+#		No arguments
+#	-----------------------------------------------------------------------
+    locate_cht $1 |                                                     \
+        sed 's|.*\/\(.*\)\.cht|\1|g' |                                  \
+        sort
+}
+
+function read_cht {
+#	-----------------------------------------------------------------------
+#	Function to display the exact content of the given cheet sheet.
+#		No arguments
+#	-----------------------------------------------------------------------
+    validates_cheats_dir_exists
+    find $CHT_SHEETS                                                    \
+        -name "$1.1"                                                    \
+        -type f |                                                       \
+        xargs less
+
+    echo "You've reached enlightenment!"
+}
+
+function update_cht {
+#	-----------------------------------------------------------------------
+#	Function to update cheats_fu
+#		No arguments
+#	-----------------------------------------------------------------------
+    validates_cheats_dir_exists
+    if [ "$1" == 'self' ]; then
+        cd /tmp                &&
+        git clone $CHT_ORIGIN  &&
+        cd $PROGNAME           &&
+        sudo make install      &&
+        echo -n 'Updated to '  &&
+        $PROGNAME -v
+    else
+        cd $CHT_SHEETS
+        git pull origin master 2> /dev/null
+    fi
+}
+
+function init_cht {
+#	-----------------------------------------------------------------------
+#	Function to initilize cheats sheets repo.
+#		No arguments
+#	-----------------------------------------------------------------------
+    if [ -d $CHT_SHEETS ]; then
+        echo "  Cheats repo already initialized!"
+        usage
+    else
+        git clone $CHT_REPO $CHT_SHEETS &&
+        echo Awesome! Cheat_fu sheets have been initialized at $CHT_SHEETS
+        usage
+    fi
+}
+
+function version {
+#	-----------------------------------------------------------------------
+#	Function to display Version
+#		No arguments
+#	-----------------------------------------------------------------------
+    echo "$PROGNAME $VERSION"
+}
+
+function validates_cheats_dir_exists {
+#	-----------------------------------------------------------------------
+#	Function to validate if cheats directory exists. If not dispay usage.
+#		No arguments
+#	-----------------------------------------------------------------------
+    if [ ! -d $CHT_SHEETS ]; then
+        echo "  $0 version: $VERSION"
+        echo "  Your cheats repo has not yes been initialized..."
+        echo "  Use option -i to do so, or -h for help! "
+        echo "  Guru Meditation..."
+        exit
+    fi
+}
+
+#	----------------------------------------------------------------------
+#	Program starts here
+#	----------------------------------------------------------------------
+
+##### Initialization And Setup #####
+
+# Trap TERM, HUP, and INT signals and properly exit
+trap "signal_exit TERM" TERM HUP
+trap "signal_exit INT"  INT
+
+##### Command Line Processing #####
+if [ "$1" = "--help" ]; then
+	helptext
+fi
+
+while getopts ":hsluriv" opt; do
+	case $opt in
+		h   )	helptext
+          ;;
+    s   ) search_cht "$2"
+          ;;
+    l   ) locate_cht "$2"
+          ;;
+    u   ) update_cht "$2"
+          ;;
+    r   ) read_cht "$2"
+          ;;
+    i   ) init_cht
+          ;;
+    v   ) version
+          ;;
+    [?] )	print >&2 "Usage: $0 [-option] cheat_sheet_name"
+		exit 1;;
+	esac
+done
+
+exit 0;

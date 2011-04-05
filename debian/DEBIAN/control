@@ -1,0 +1,9 @@
+Package: cheat-fu
+Version: 1.1-1
+Section: base
+Priority: optional
+Architecture: all
+Depends: bash (>= 2.05a-11), awk, sed (>= 3.02-8), grep (>= 2.4.2-3), coreutils (>= 5.0-5)
+Maintainer: Jose Pablo Barrantes  <xjpablobrx@gmail.com>
+Description: Quick cheat sheets (sh-based) command line tool.
+ Cheat_fu is a quick cheats sheets (sh-based) command line tool (based on git) meant to provide a nice shell terminal layout to your cheat sheets.
