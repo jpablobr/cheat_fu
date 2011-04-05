@@ -136,7 +136,8 @@ This will output your Roff file.
 
 ## TODO:
 
-* An emacs cheat_fu-mode
+   * An emacs cheat_fu-mode.
+   * Host the debian package so it can be added to /etc/apt/sources.list.
 
 ## Directory Structure:
     .
