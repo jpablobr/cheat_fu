@@ -29,7 +29,7 @@
 #	-------------------------------------------------------------------
 
 PROGNAME=$(basename $0)
-VERSION='0.1.0'
+VERSION='0.1.1'
 CHT_SHEETS=${CHT_SHEETS:-~/.cheat_fu_sheets/}
 CHT_REPO=${CHT_REPO:-git://github.com/jpablobr/cheat_fu_sheets.git}
 CHT_ORIGIN=${CHT_ORIGIN:-git://github.com/jpablobr/cheat_fu.git}
@@ -143,11 +143,11 @@ function locate_cht {
     if [ $1 ]; then
         find $CHT_SHEETS                                                \
             -type f                                                     \
-            -name "*$1*.1"                                              \
+            -name "*$1*.1.ronn"                                         \
             -printf "$OUTPUT_COLOR  %p \n"
     else
         find $CHT_SHEETS                                                \
-            -name "*.1"                                                 \
+            -name "*.1.ronn"                                            \
             -type f                                                     \
             -printf "$OUTPUT_COLOR  %p \n"
     fi
@@ -159,7 +159,7 @@ function search_cht {
 #		No arguments
 #	-----------------------------------------------------------------------
     locate_cht $1 |                                                     \
-        sed 's|.*\/\(.*\)\.cht|\1|g' |                                  \
+        sed 's|.*\/\(.*\)\.ronn|\1|g' |                                 \
         sort
 }
 
@@ -170,7 +170,7 @@ function read_cht {
 #	-----------------------------------------------------------------------
     validates_cheats_dir_exists
     find $CHT_SHEETS                                                    \
-        -name "$1.1"                                                    \
+        -name "$1.1.ronn"                                               \
         -type f |                                                       \
         xargs less
 
