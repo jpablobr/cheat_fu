@@ -66,6 +66,7 @@ modern publishing tools.
   * Few dependencies (common now, you should have them (sed, git, etc))
   * Self updating via `cheat_fu -uself`
   * Instant cheat sheet updates via `cheat_fu -u`
+  * Terminal cheats completion.
 
 ## Installing/Uninstalling
 
@@ -83,6 +84,14 @@ Uninstall
     $ sudo dpkg --remove cheat-fu
 
 Cheat_fu is just a bash shell script, therefore, you can just put it on one of your `bin` directories in your `$PATH` and you're ready to start cheating!
+
+## Completion
+
+Source the cheat_fu_completion script in your .bashrc.
+
+For example add the following:
+
+`source ~/cheat_fu_completion`
 
 ## cheat_fu help
 

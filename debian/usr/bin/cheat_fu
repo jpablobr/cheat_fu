@@ -29,7 +29,7 @@
 #	-------------------------------------------------------------------
 
 PROGNAME=$(basename $0)
-VERSION='0.1.1'
+VERSION='0.2.0'
 CHT_SHEETS=${CHT_SHEETS:-~/.cheat_fu_sheets/}
 CHT_REPO=${CHT_REPO:-git://github.com/jpablobr/cheat_fu_sheets.git}
 CHT_ORIGIN=${CHT_ORIGIN:-git://github.com/jpablobr/cheat_fu.git}
@@ -71,7 +71,7 @@ function helptext {
   -u [self]       Updates cheat_fu.
   -v              Outputs current version.
 
-  $ cheat_fu -r ronn
+  $ cheat_fu -r ronn or cheat_fu ronn
 
   Reads the exact <sheet> given. No globbing allowed here!
 
@@ -168,13 +168,14 @@ function read_cht {
 #	Function to display the exact content of the given cheet sheet.
 #		No arguments
 #	-----------------------------------------------------------------------
-    validates_cheats_dir_exists
+    validates_cheats_exists "$1"
     find $CHT_SHEETS                                                    \
         -name "$1.1.ronn"                                               \
         -type f |                                                       \
         xargs less
 
     echo "You've reached enlightenment!"
+    exit 0
 }
 
 function update_cht {
@@ -219,6 +220,19 @@ function version {
     echo "$PROGNAME $VERSION"
 }
 
+function validates_cheats_exists {
+#	-----------------------------------------------------------------------
+#	Function to validate if cheats exists. If not dispay usage.
+#		No arguments
+#	-----------------------------------------------------------------------
+    validates_cheats_dir_exists
+    cheat_search=`find $CHT_SHEETS  -type f -name "$1.1.ronn"`
+    if [[ ! $cheat_search =~ ^/+ ]]; then
+        echo "  Cheat do not exist. "
+        usage
+    fi
+}
+
 function validates_cheats_dir_exists {
 #	-----------------------------------------------------------------------
 #	Function to validate if cheats directory exists. If not dispay usage.
@@ -227,9 +241,7 @@ function validates_cheats_dir_exists {
     if [ ! -d $CHT_SHEETS ]; then
         echo "  $0 version: $VERSION"
         echo "  Your cheats repo has not yes been initialized..."
-        echo "  Use option -i to do so, or -h for help! "
-        echo "  Guru Meditation..."
-        exit
+        usage
     fi
 }
 
@@ -248,7 +260,11 @@ if [ "$1" = "--help" ]; then
 	helptext
 fi
 
-while getopts ":hsluriv" opt; do
+if [[ ! "$1" =~ ^-+ ]]; then
+    read_cht "$1"
+fi
+
+while getopts ":hs:lur:iv" opt; do
 	case $opt in
 		h   )	helptext
           ;;
@@ -263,8 +279,6 @@ while getopts ":hsluriv" opt; do
     i   ) init_cht
           ;;
     v   ) version
-          ;;
-    [?] )	print >&2 "Usage: $0 [-option] cheat_sheet_name"
 		exit 1;;
 	esac
 done

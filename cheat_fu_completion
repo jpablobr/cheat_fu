@@ -1,0 +1,21 @@
+#-*- mode: shell-script;-*-
+
+# cheat_fu command line completion.
+# Copyright 2011 Jose Pablo Barrantes <xjpablobrx@gmail.com>
+# Licensed under MIT
+
+: ${have=$(command -v cheat_fu)}
+
+test -n "$have" &&
+_cheat_fu_complete()
+{
+  COMPREPLY=()
+  HOME=~
+  if [ $COMP_CWORD = 1 ]; then
+    sheets=`cheat_fu -l | sed s:$HOME/.cheat_fu_sheets/::g`
+    COMPREPLY=(`compgen -W "$sheets" -- $2`)
+  fi
+  return 0
+
+}
+test -n "$have" && complete -F _cheat_fu_complete -o default cheat_fu ct
