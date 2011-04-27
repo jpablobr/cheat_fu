@@ -12,7 +12,7 @@ _cheat_fu_complete()
   COMPREPLY=()
   HOME=~
   if [ $COMP_CWORD = 1 ]; then
-    sheets=`cheat_fu -l | sed s:$HOME/.cheat_fu_sheets/::g`
+    sheets=`cheat_fu -l | sed s:$HOME/.cheat_fu_sheets/::g | sed s:\.1\.ronn::g`
     COMPREPLY=(`compgen -W "$sheets" -- $2`)
   fi
   return 0
