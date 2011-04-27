@@ -29,7 +29,7 @@
 #	-------------------------------------------------------------------
 
 PROGNAME=$(basename $0)
-VERSION='0.2.0'
+VERSION='0.2.1'
 CHT_SHEETS=${CHT_SHEETS:-~/.cheat_fu_sheets/}
 CHT_REPO=${CHT_REPO:-git://github.com/jpablobr/cheat_fu_sheets.git}
 CHT_ORIGIN=${CHT_ORIGIN:-git://github.com/jpablobr/cheat_fu.git}
@@ -170,7 +170,7 @@ function read_cht {
 #	-----------------------------------------------------------------------
     validates_cheats_exists "$1"
     find $CHT_SHEETS                                                    \
-        -name "$1.1.ronn"                                               \
+        -name "$1.1"                                                    \
         -type f |                                                       \
         xargs less
 
